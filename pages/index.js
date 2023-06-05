@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <div>
+    <main className="pt-32"> {/* Add top padding to prevent content being hidden */}
       Main page
-    </div>
+    </main>
   )
 }
