@@ -1,9 +1,14 @@
+import Head from 'next/head';
 import React from 'react'
 
 function About() {
   return (
-    <div>About</div>
-  )
+    <div>
+      <Head>
+        <title>About - Owenw.Photography</title>
+      </Head>
+    </div>
+  );
 }
 
 export default About

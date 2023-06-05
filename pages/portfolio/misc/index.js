@@ -1,14 +1,14 @@
 import Head from 'next/head';
 import React from 'react'
 
-function Sports() {
+function Misc() {
   return (
     <div>
       <Head>
-        <title>Sports Photography - Owenw.Photography</title>
+        <title>Miscellaneous Photography - Owenw.Photography</title>
       </Head>
     </div>
   );
 }
 
-export default Sports
+export default Misc

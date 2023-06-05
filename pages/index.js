@@ -1,6 +1,12 @@
+import Head from "next/head";
+
 export default function Home() {
   return (
+    
     <main className="pt-36">
+      <Head>
+        <title>Owenw.Photography</title>
+      </Head>
       {" "}
       {/* Add top padding to prevent content being hidden */}
       main
@@ -9,15 +15,8 @@ export default function Home() {
 }
 
 
+//need specifics for main page
+//pull static from other webpage, and old deleted page
+//up whenever, final date end of the month
+//fonts
 
-
-//I need that font
-//I need that block icon
-//I need main images (might already have them)
-//secret upload (username, password)
-//contact form
-
-
-//water mark
-//payment
-//favour

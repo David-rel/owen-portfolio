@@ -17,14 +17,14 @@ function Navbar() {
       className="fixed top-0 w-full flex justify-between items-center p-12 transition-opacity duration-4000 bg-black"
       style={{ opacity: opacity }}
     >
-      <Link href="/" legacyBehavior>
-        <h1 className="text-4xl font-bold">Owenw.Photography</h1>
-      </Link>
+      {/* <Link href="/" legacyBehavior> */}
+        <h1 className="text-4xl font-bold">Owenw.Photography</h1> {/* Adonis font */}
+      {/* </Link> */}
 
       <nav className="flex items-center">
         <div className="space-x-8 text-lg">
           {[
-            ["/", "Home"],
+            ["/", "Home Page"],
             ["/portfolio", "Portfolio"],
             ["/about", "About"],
             ["/contact", "Contact"],
