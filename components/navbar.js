@@ -14,7 +14,7 @@ function Navbar() {
 
   return (
     <header
-      className="fixed top-0 w-full flex justify-between items-center p-12 transition-opacity duration-4000"
+      className="fixed top-0 w-full flex justify-between items-center p-12 transition-opacity duration-4000 bg-black"
       style={{ opacity: opacity }}
     >
       <Link href="/" legacyBehavior>

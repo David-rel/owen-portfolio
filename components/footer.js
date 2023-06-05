@@ -1,12 +1,15 @@
-import React from 'react'
+import React from "react";
+import styles from "../styles/footer.module.css"; // Adjust the path if necessary
 
-function footer() {
+function Footer() {
   return (
-    <div className='bg-white text-black'>
+    <div className={styles.footer}>
       <h1>Owen Weis</h1>
-      <h1>A photo a way form you next event</h1>
+      <h1>A photo away from your next event</h1>
+      <p className={styles.footerMessage}>Website created by @David-Rel website, buy me a coffee</p>{" "}
+      
     </div>
   );
 }
 
-export default footer
+export default Footer;

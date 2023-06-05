@@ -3,8 +3,24 @@ import { CloudinaryContext, Image as CloudinaryImage } from "cloudinary-react";
 import UploadWidget from "@/components/UploadWidget";
 
 function Upload() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const [uploadedCarImages, setUploadedCarImages] = useState([]);
   const [uploadedSportsImages, setUploadedSportsImages] = useState([]);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (
+      username === process.env.NEXT_PUBLIC_USERNAME &&
+      password === process.env.NEXT_PUBLIC_PASSWORD
+    ) {
+      setLoggedIn(true);
+    } else {
+      alert("Invalid credentials");
+    }
+  };
 
   const handleCarUpload = (error, result) => {
     if (result.event === "success") {
@@ -21,6 +37,59 @@ function Upload() {
       });
     }
   };
+
+  if (!loggedIn) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <form
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          onSubmit={handleLogin}
+        >
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="username"
+            >
+              Username
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Login, Owen
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+
 
   return (
     <div className="pt-32 pb-4">
@@ -40,7 +109,9 @@ function Upload() {
         <div className="flex flex-wrap">
           {uploadedCarImages.map((publicId, index) => (
             <div key={index} className="w-1/3 p-4">
-              <CloudinaryContext cloudName="dpivcgllr">
+              <CloudinaryContext
+                cloudName={`${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}`}
+              >
                 <CloudinaryImage publicId={publicId} />
               </CloudinaryContext>
             </div>
@@ -63,7 +134,9 @@ function Upload() {
         <div className="flex flex-wrap">
           {uploadedSportsImages.map((publicId, index) => (
             <div key={index} className="w-1/3 p-4">
-              <CloudinaryContext cloudName="dpivcgllr">
+              <CloudinaryContext
+                cloudName={`${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}`}
+              >
                 <CloudinaryImage publicId={publicId} />
               </CloudinaryContext>
             </div>
