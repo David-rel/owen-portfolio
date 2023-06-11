@@ -1,22 +1,86 @@
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import { motion, AnimatePresence } from "framer-motion";
+import NextImage from "next/image";
 import Head from "next/head";
 
-export default function Home() {
+const GridItem = ({ photo, setLoadCount, totalImages }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
+
+  const [loaded, setLoaded] = useState(false);
+
+  const handleLoad = () => {
+    console.log(`Image ${photo} has loaded.`);
+    setLoadCount((count) => count + 1);
+    setLoaded(true);
+  };
+
+  const handleError = () => {
+    console.error(`Failed to load image: ${photo}`);
+  };
+
   return (
-    
+    <div ref={ref} className="grid-item grid-item-1">
+      <AnimatePresence>
+        {inView && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: loaded ? 1 : 0 }}
+            whileHover={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <NextImage
+              src={`/main/${photo}`}
+              alt=""
+              layout="responsive"
+              width={500}
+              height={500}
+              priority
+              onLoadingComplete={handleLoad}
+              onError={handleError}
+              className={`bg-black ${inView ? 'hover:opacity-100 transition-opacity duration-1000' : 'opacity-0'}`}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default function Home() {
+  const [images, setImages] = useState([]);
+  const [loadCount, setLoadCount] = useState(0);
+
+  useEffect(() => {
+    fetch("/main/images.json")
+      .then((response) => response.json())
+      .then((data) => setImages(data));
+  }, []);
+
+  return (
     <main className="pt-36">
       <Head>
         <title>Owenw.Photography</title>
+        <link
+          rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous"
+        />
       </Head>
-      {" "}
-      {/* Add top padding to prevent content being hidden */}
-      main
+      <div className="grid-container">
+        {images.map((photo) => (
+          <GridItem
+            key={photo}
+            photo={photo}
+            setLoadCount={setLoadCount}
+            totalImages={images.length}
+          />
+        ))}
+      </div>
     </main>
   );
 }
-
-
-//need specifics for main page
-//pull static from other webpage, and old deleted page
-//up whenever, final date end of the month
-//fonts
-

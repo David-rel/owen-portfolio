@@ -14,13 +14,12 @@ function Navbar() {
 
   return (
     <header
-      className="fixed top-0 w-full flex justify-between items-center p-12 transition-opacity duration-4000 bg-black"
+      className="fixed top-0 w-full flex p-12 transition-opacity duration-4000 bg-black z-10"
       style={{ opacity: opacity }}
     >
-      {/* <Link href="/" legacyBehavior> */}
-        <h1 className="text-4xl font-bold">Owenw.Photography</h1> {/* Adonis font */}
-      {/* </Link> */}
-
+      <div className="text-4xl font-bold">Owenw.Photography</div>{" "}
+      {/* Adonis font */}
+      <div className="flex-grow"></div>
       <nav className="flex items-center">
         <div className="space-x-8 text-lg">
           {[

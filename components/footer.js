@@ -4,10 +4,11 @@ import styles from "../styles/footer.module.css"; // Adjust the path if necessar
 function Footer() {
   return (
     <div className={styles.footer}>
-      <h1>Owen Weis</h1>
-      <h1>A photo away from your next event</h1>
-      <p className={styles.footerMessage}>Website created by @David-Rel website, buy me a coffee</p>{" "}
-      
+      <h1 className="text-black">Owen Weis</h1>
+      <h1 className="text-black">A photo away from your next event</h1>
+      <p className={styles.footerMessage}>
+        Website created by @David-Rel website, buy me a coffee
+      </p>{" "}
     </div>
   );
 }
