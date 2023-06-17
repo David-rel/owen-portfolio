@@ -21,6 +21,11 @@ const GridItem = ({ photo, setLoadCount, totalImages }) => {
     console.error(`Failed to load image: ${photo}`);
   };
 
+    useEffect(() => {
+      console.log("inView:", inView);
+      console.log("Loaded:", loaded);
+    }, [inView, loaded]);
+
   return (
     <div ref={ref} className="grid-item grid-item-1">
       <AnimatePresence>
@@ -28,9 +33,7 @@ const GridItem = ({ photo, setLoadCount, totalImages }) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: loaded ? 1 : 0 }}
-            whileHover={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }} // Increase the duration from 1 to 2
           >
             <NextImage
               src={`/main/${photo}`}
@@ -38,10 +41,13 @@ const GridItem = ({ photo, setLoadCount, totalImages }) => {
               layout="responsive"
               width={500}
               height={500}
-              priority
               onLoadingComplete={handleLoad}
               onError={handleError}
-              className={`bg-black ${inView ? 'hover:opacity-100 transition-opacity duration-1000' : 'opacity-0'}`}
+              className={`bg-black ${
+                inView
+                  ? "hover:opacity-100 transition-opacity duration-1000"
+                  : "opacity-0"
+              }`}
             />
           </motion.div>
         )}
