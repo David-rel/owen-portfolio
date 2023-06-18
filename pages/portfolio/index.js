@@ -1,9 +1,17 @@
 import Head from "next/head";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Portfolio() {
   const [bgImage, setBgImage] = useState("initial");
+   const [loaded, setLoaded] = useState(false);
+
+   useEffect(() => {
+     const timer = setTimeout(() => {
+       setLoaded(true);
+     }, 1000); // 1 second delay
+     return () => clearTimeout(timer);
+   }, []);
 
   const handleMouseEnter = (category) => {
     setBgImage(category);
@@ -14,7 +22,7 @@ function Portfolio() {
   };
 
   return (
-    <div className="pt-36 flex flex-col items-center justify-center min-h-screen relative overflow-hidden">
+    <div className=" flex flex-col items-center justify-center min-h-screen relative overflow-hidden">
       <Head>
         <title>Portfolio - Owenw.Photography</title>
       </Head>
@@ -47,29 +55,35 @@ function Portfolio() {
       <div className="z-10 flex flex-col items-center space-y-10">
         <Link href="/portfolio/cars" legacyBehavior>
           <a
-            className="text-8xl text-black"
+            className={`text-8xl transition-colors duration-500 ease-in pb-8 ${
+              loaded ? "text-black" : "text-transparent"
+            }`}
             onMouseEnter={() => handleMouseEnter("cars")}
             onMouseLeave={handleMouseLeave}
           >
-            Cars
+            Automotive Photography
           </a>
         </Link>
         <Link href="/portfolio/sports" legacyBehavior>
           <a
-            className="text-8xl text-black"
+            className={`text-8xl transition-colors duration-500 ease-in p-8 ${
+              loaded ? "text-black" : "text-transparent"
+            }`}
             onMouseEnter={() => handleMouseEnter("sports")}
             onMouseLeave={handleMouseLeave}
           >
-            Sports
+            Sports Photography
           </a>
         </Link>
         <Link href="/portfolio/misc" legacyBehavior>
           <a
-            className="text-8xl text-black"
+            className={`text-8xl transition-colors duration-500 ease-in p-8 ${
+              loaded ? "text-black" : "text-transparent"
+            }`}
             onMouseEnter={() => handleMouseEnter("misc")}
             onMouseLeave={handleMouseLeave}
           >
-            Miscellaneous
+            Miscellaneous Photography
           </a>
         </Link>
       </div>

@@ -3,7 +3,7 @@ import React from 'react'
 
 function Misc() {
   return (
-    <div>
+    <div className='pt-36'>
       <Head>
         <title>Miscellaneous Photography - Owenw.Photography</title>
       </Head>

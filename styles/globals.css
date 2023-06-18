@@ -32,3 +32,25 @@ body {
   transition: all 0.25s ease-in-out;
 }
 
+.main {
+  position: relative;
+  padding: 200px 0; /* Adjust padding as needed */
+  background-color: transparent; /* Set the background to transparent */
+  color: black;
+  z-index: 10;
+
+}
+
+.main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(219, 218, 218);
+  /* Create a slanted shape with a straight bottom edge */
+  clip-path: polygon(0 20%, 100% 0%, 100% 100%, 0 100%);
+  transform-origin: top left;
+  z-index: -1;
+}

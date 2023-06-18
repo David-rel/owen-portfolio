@@ -3,7 +3,7 @@ import React from 'react'
 
 function Sports() {
   return (
-    <div>
+    <div className='pt-36'>
       <Head>
         <title>Automotive Photography - Owenw.Photography</title>
       </Head>

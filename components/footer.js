@@ -17,6 +17,8 @@ function Footer() {
   const router = useRouter();
 
   useEffect(() => {
+    // Adding checkTextVisibility to be called once on component mount
+    checkTextVisibility();
     window.addEventListener("scroll", checkTextVisibility);
     return () => {
       window.removeEventListener("scroll", checkTextVisibility);
@@ -27,11 +29,11 @@ function Footer() {
     <div
       className={`${styles.footer} ${
         router.pathname === "/portfolio" ? styles.noSlant : ""
-      }`}
+      } ${router.pathname === "/" ? styles.noSlant : ""}`}
     >
       <div
         ref={textRef}
-        className={`${isVisible ? styles.fadeIn : styles.fadeOut} pl-14`}
+        className={`${isVisible ? styles.fadeIn : styles.fadeOut} pl-14 `}
       >
         <h1 className="text-black pb-4">Owen Weis</h1>
         <h1 className="text-black">A photo away from your next event</h1>
