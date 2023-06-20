@@ -14,7 +14,7 @@ function Navbar() {
 
   return (
     <header
-      className="fixed top-0 w-full flex p-12 transition-opacity duration-4000 bg-black z-10"
+      className="fixed top-0 w-full flex p-12 transition-opacity duration-4000 bg-black z-20"
       style={{ opacity: opacity }}
     >
       <div className="text-4xl font-bold">Owenw.Photography</div>{" "}

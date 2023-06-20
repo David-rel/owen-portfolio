@@ -1,63 +1,55 @@
-import { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import NextImage from "next/image";
 import Head from "next/head";
 import Link from "next/link";
+import { throttle } from "lodash";
 
-const GridItem = ({ photo, setLoadCount, totalImages }) => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-  });
+const GridItem = ({ photo }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasBeenVisible, setHasBeenVisible] = useState(false); // new state variable
 
-  const [loaded, setLoaded] = useState(false);
+  const textRef = useRef();
 
-  const handleLoad = () => {
-    console.log(`Image ${photo} has loaded.`);
-    setLoadCount((count) => count + 1);
-    setLoaded(true);
-  };
+  const checkTextVisibility = throttle(() => {
+    const rect = textRef.current.getBoundingClientRect();
+    const isVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
+    if (isVisible && !hasBeenVisible) {
+      // only trigger setIsVisible if it's the first time
 
-  const handleError = () => {
-    console.error(`Failed to load image: ${photo}`);
-  };
+      setIsVisible(isVisible);
+      setHasBeenVisible(true); // remember that this element has been visible
+    }
+  }, 200);
 
-    useEffect(() => {
-      console.log("inView:", inView);
-      console.log("Loaded:", loaded);
-    }, [inView, loaded]);
+  useEffect(() => {
+    // Adding checkTextVisibility to be called once on component mount
+    checkTextVisibility();
+    window.addEventListener("scroll", checkTextVisibility);
+    return () => {
+      window.removeEventListener("scroll", checkTextVisibility);
+    };
+  }, []);
 
   return (
-    <div ref={ref} className="grid-item grid-item-1">
-      <AnimatePresence>
-        {inView && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: loaded ? 1 : 0 }}
-            transition={{ duration: 2 }} // Increase the duration from 1 to 2
-          >
-            <NextImage
-              src={`/main/${photo}`}
-              alt=""
-              layout="responsive"
-              width={500}
-              height={500}
-              onLoadingComplete={handleLoad}
-              onError={handleError}
-              className={`bg-black ${
-                inView
-                  ? "hover:opacity-100 transition-opacity duration-1000"
-                  : "opacity-0"
-              }`}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <div
+      className={`p-5 grid-item grid-item-1 ${
+        isVisible ? "fadeIn" : "fadeOut"
+      }`}
+      ref={textRef}
+    >
+      <div>
+        <NextImage
+          src={`/main/${photo}`}
+          alt=""
+          layout="responsive"
+          width={500}
+          height={500}
+          className={`bg-black`}
+        />
+      </div>
     </div>
   );
 };
-
-// ...
 
 export default function Home() {
   const [images, setImages] = useState([]);
@@ -69,9 +61,28 @@ export default function Home() {
       .then((data) => setImages(data));
   }, []);
 
+  const [isVisible, setIsVisible] = useState(false);
+
+  const textRef = useRef();
+
+  const checkTextVisibility = throttle(() => {
+    const rect = textRef.current.getBoundingClientRect();
+    const isVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
+    setIsVisible(isVisible);
+  }, 200);
+
+  useEffect(() => {
+    // Adding checkTextVisibility to be called once on component mount
+    checkTextVisibility();
+    window.addEventListener("scroll", checkTextVisibility);
+    return () => {
+      window.removeEventListener("scroll", checkTextVisibility);
+    };
+  }, []);
+
   return (
-    <div>
-      <main className="pt-36">
+    <div className="p-">
+      <main className="pt-36 pl-10">
         <Head>
           <title>Owenw.Photography</title>
           <link
@@ -81,7 +92,7 @@ export default function Home() {
             crossorigin="anonymous"
           />
         </Head>
-        <div className="grid-container">
+        <div className={`p-5 grid-container`}>
           {images.map((photo) => (
             <GridItem
               key={photo}
@@ -93,15 +104,24 @@ export default function Home() {
         </div>
       </main>
 
-      {/* New section with gray background, title, and description */}
-      <section className="main bg-gray-200 p-6 p-4">
-        <h2 className="text-2xl mb-4 text-black pl-8">
+      <section className="main bg-gray-200">
+        <div
+          ref={textRef}
+          className={`text-2xl mb-4 text-black pl-20 ${
+            isVisible ? "fadeIn" : "fadeOut"
+          }`}
+        >
           <Link href="/about" className="text-red-600 underline">
             About Me
           </Link>{" "}
           - Owen Weis, Photographer and Videographer
-        </h2>
-        <p className="text-black leading-10 w-4/5 pl-8">
+        </div>
+        <div
+          ref={textRef}
+          className={`text-black leading-10 w-4/5 pl-20 ${
+            isVisible ? "fadeIn" : "fadeOut"
+          }`}
+        >
           Owen Weis is an incredibly talented photographer and videographer,
           specializing in sports, automotive, and portrait photography. My work
           has captivated audiences all around world , and my creative vision has
@@ -113,9 +133,8 @@ export default function Home() {
           for more. With my skills and expertise, there is no doubt that I will
           continue to produce some of the most captivating and awe-inspiring
           creations for years to come.
-        </p>
+        </div>
       </section>
     </div>
   );
 }
-

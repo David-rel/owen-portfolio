@@ -4,21 +4,25 @@ import React, { useEffect, useState } from "react";
 
 function Portfolio() {
   const [bgImage, setBgImage] = useState("initial");
-   const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [hover, setHover] = useState(false)
 
-   useEffect(() => {
-     const timer = setTimeout(() => {
-       setLoaded(true);
-     }, 1000); // 1 second delay
-     return () => clearTimeout(timer);
-   }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoaded(true);
+    }, 1000); // 1 second delay
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleMouseEnter = (category) => {
     setBgImage(category);
+    setHover(true)
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (
+  ) => {
     setBgImage("initial");
+    setHover(false)
   };
 
   return (
@@ -55,9 +59,9 @@ function Portfolio() {
       <div className="z-10 flex flex-col items-center space-y-10">
         <Link href="/portfolio/cars" legacyBehavior>
           <a
-            className={`text-8xl transition-colors duration-500 ease-in pb-8 ${
+            className={`xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl transition-colors duration-500 ease-in pb-8 sm:pb-4 pt-20 ${
               loaded ? "text-black" : "text-transparent"
-            }`}
+            } ${hover ? "text-white" : "text-black"}`}
             onMouseEnter={() => handleMouseEnter("cars")}
             onMouseLeave={handleMouseLeave}
           >
@@ -66,9 +70,9 @@ function Portfolio() {
         </Link>
         <Link href="/portfolio/sports" legacyBehavior>
           <a
-            className={`text-8xl transition-colors duration-500 ease-in p-8 ${
+            className={`xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl transition-colors duration-500 ease-in pb-8 sm:pb-4 ${
               loaded ? "text-black" : "text-transparent"
-            }`}
+            } ${hover ? "text-white" : "text-black"}`}
             onMouseEnter={() => handleMouseEnter("sports")}
             onMouseLeave={handleMouseLeave}
           >
@@ -77,9 +81,9 @@ function Portfolio() {
         </Link>
         <Link href="/portfolio/misc" legacyBehavior>
           <a
-            className={`text-8xl transition-colors duration-500 ease-in p-8 ${
+            className={`xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl transition-colors duration-500 ease-in pb-8 sm:pb-4 ${
               loaded ? "text-black" : "text-transparent"
-            }`}
+            } ${hover ? "text-white" : "text-black"}`}
             onMouseEnter={() => handleMouseEnter("misc")}
             onMouseLeave={handleMouseLeave}
           >

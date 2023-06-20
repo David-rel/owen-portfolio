@@ -1,14 +1,46 @@
 import Head from "next/head";
 import Link from "next/link";
 import { FaInstagram } from "react-icons/fa";
+import { throttle } from "lodash";
+import { useEffect, useRef, useState } from "react";
+
 
 export default function Contact() {
+
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const textRef = useRef();
+
+  const checkTextVisibility = throttle(() => {
+    const rect = textRef.current.getBoundingClientRect();
+    const isVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
+    setIsVisible(isVisible);
+  }, 200);
+
+  useEffect(() => {
+    // Adding checkTextVisibility to be called once on component mount
+    checkTextVisibility();
+    window.addEventListener("scroll", checkTextVisibility);
+    return () => {
+      window.removeEventListener("scroll", checkTextVisibility);
+    };
+  }, []);
+
+
   return (
-    <div className="flex justify-start items-start h-full p-10 pt-36">
+    <div
+      className={`flex justify-start items-start h-full p-10 pt-36 pb-96`}
+    >
       <Head>
         <title>Contact - Owenw.Photography</title>
       </Head>
-      <div className="w-2/5 bg-black p-0 rounded-md shadow-lg">
+      <div
+        className={`w-2/5 bg-black p-0 rounded-md shadow-lg ${
+          isVisible ? "fadeIn" : "fadeOut"
+        }`}
+        ref={textRef}
+      > 
         <div className="mb-10 mt-7">
           <p className="text-white text-lg ">
             Looking to discuss a project? Please get in touch using the form on
@@ -32,7 +64,7 @@ export default function Contact() {
         </div>
       </div>
 
-      <div className="w-2/5 ml-10 bg-black p-5 rounded-md shadow-lg">
+      <div className="w-2/5 ml-10 p-5 rounded-md shadow-lg">
         <form
           className="flex flex-col space-y-5"
           action="https://formspree.io/f/mayznwba"
