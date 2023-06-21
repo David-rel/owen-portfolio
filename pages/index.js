@@ -1,64 +1,58 @@
-import { useEffect, useRef, useState } from "react";
 import NextImage from "next/image";
-import Head from "next/head";
 import Link from "next/link";
 import { throttle } from "lodash";
+import Head from "next/head";
+import { CloudinaryContext, Image as CloudinaryImage } from "cloudinary-react";
+import { Transition } from "@headlessui/react";
+import React, { useEffect, useState, useRef } from "react";
 
 const GridItem = ({ photo }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [hasBeenVisible, setHasBeenVisible] = useState(false); // new state variable
-
-  const textRef = useRef();
-
-  const checkTextVisibility = throttle(() => {
-    const rect = textRef.current.getBoundingClientRect();
-    const isVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
-    if (isVisible && !hasBeenVisible) {
-      // only trigger setIsVisible if it's the first time
-
-      setIsVisible(isVisible);
-      setHasBeenVisible(true); // remember that this element has been visible
-    }
-  }, 200);
+  const domRef = React.useRef();
 
   useEffect(() => {
-    // Adding checkTextVisibility to be called once on component mount
-    checkTextVisibility();
-    window.addEventListener("scroll", checkTextVisibility);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => setIsVisible(entry.isIntersecting));
+    });
+
+    const currentDomRef = domRef.current; // Capture current ref instance
+    observer.observe(currentDomRef);
+
     return () => {
-      window.removeEventListener("scroll", checkTextVisibility);
+      if (currentDomRef) {
+        // Add null check
+        observer.unobserve(currentDomRef);
+      }
     };
   }, []);
 
   return (
-    <div
-      className={`p-5 grid-item grid-item-1 ${
-        isVisible ? "fadeIn" : "fadeOut"
-      }`}
-      ref={textRef}
-    >
-      <div>
-        <NextImage
-          src={`/main/${photo}`}
+    <div className={`p-5 grid-item grid-item-1`} ref={domRef}>
+      <CloudinaryContext
+        cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
+      >
+        <CloudinaryImage
+          publicId={photo}
+          width="425" // adjust to your preference
+          crop="scale"
           alt=""
-          layout="responsive"
-          width={500}
-          height={500}
-          className={`bg-black`}
+          className={`bg-black ${isVisible ? "fadeIn" : "fadeOut"}`}
         />
-      </div>
+      </CloudinaryContext>
     </div>
   );
 };
+
 
 export default function Home() {
   const [images, setImages] = useState([]);
   const [loadCount, setLoadCount] = useState(0);
 
+
   useEffect(() => {
-    fetch("/main/images.json")
+    fetch("/api/getMainId")
       .then((response) => response.json())
-      .then((data) => setImages(data));
+      .then((data) => setImages(data.publicIds));
   }, []);
 
   const [isVisible, setIsVisible] = useState(false);
@@ -94,12 +88,7 @@ export default function Home() {
         </Head>
         <div className={`p-5 grid-container`}>
           {images.map((photo) => (
-            <GridItem
-              key={photo}
-              photo={photo}
-              setLoadCount={setLoadCount}
-              totalImages={images.length}
-            />
+            <GridItem key={photo} photo={photo} />
           ))}
         </div>
       </main>

@@ -1,16 +1,39 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function About() {
+  const [imageFadeIn, setImageFadeIn] = useState(false);
+  const [textFadeIn, setTextFadeIn] = useState(false);
+
+  useEffect(() => {
+    const imageTimer = setTimeout(() => {
+      setImageFadeIn(true);
+    }, 500); // Image fade in after 500ms
+
+    const textTimer = setTimeout(() => {
+      setTextFadeIn(true);
+    }, 1000); // Text fade in after 1000ms
+
+    // Clear the timers when the component unmounts
+    return () => {
+      clearTimeout(imageTimer);
+      clearTimeout(textTimer);
+    };
+  }, []);
+
   return (
     <div className="pt-40 flex">
       <Head>
         <title>About - Owenw.Photography</title>
       </Head>
 
-      <div className="w-3/5 px-8">
+      <div
+        className={`w-1/2 px-8 transition-opacity duration-500 ${
+          textFadeIn ? "opacity-100" : "opacity-0"
+        }`}
+      >
         <p className="text-3xl italic mb-10 leading-10">
           Owen Weis is a name that resonates with innovation and dedication. As
           a senior in high school, this 17-year-old possesses a unique blend of
@@ -40,10 +63,14 @@ function About() {
         </ul>
       </div>
 
-      <div className="w-2/5 px-8 flex flex-col items-start">
-        <div className="relative w-[450px] h-[550px] mb-4">
+      <div
+        className={`w-2/5 px-8 flex flex-col items-start transition-opacity duration-500 ${
+          imageFadeIn ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <div className="relative min-w-[200px] min-h-[200px] lg:w-[450px] lg:h-[550px] xl:w-[700px] xl:h-[600px mb-4] p-2 -m-2 pr-8">
           <Image
-            src="/cars/1-IMG_2974.jpg"
+            src="/10-IMG_0306.jpg"
             alt="About us"
             layout="fill"
             objectFit="cover"
@@ -55,7 +82,7 @@ function About() {
           Jesuit High school Elevate Magazine
         </p>
         <Link href="/contact">
-          <button className="mt-4 py-4 px-14 text-xl rounded-full bg-black border-2 text-white hover:bg-white hover:text-black hover:border-black">
+          <button className="mt-4 py-4 px-14 text-xl rounded-full border-2 text-white hover:bg-white hover:text-black hover:border-black">
             Work With Me
           </button>
         </Link>
