@@ -47,7 +47,7 @@ function About() {
           At the tender age of 17, Owen has already left an indelible mark on
           the world around him. His outgoing personality and unwavering
           commitment to delivering exceptional results has propelled him to the
-          forefront of his peers. Here's a result of that work.
+          forefront of his peers. Here&apos;s a result of that work.
         </p>
         <p className="text-2xl italic mb-4 font-audiowide">
           Achievements/Awards
