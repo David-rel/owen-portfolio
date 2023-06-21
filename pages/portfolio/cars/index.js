@@ -1,35 +1,31 @@
-import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
-import { throttle } from "lodash";
 import { CloudinaryContext, Image as CloudinaryImage } from "cloudinary-react";
+import { Transition } from "@headlessui/react";
+import React, { useEffect, useState } from "react";
 
 const GridItem = ({ photo }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [hasBeenVisible, setHasBeenVisible] = useState(false);
+  const domRef = React.useRef();
 
-  const textRef = useRef();
+useEffect(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => setIsVisible(entry.isIntersecting));
+  });
 
-  const checkTextVisibility = throttle(() => {
-    const rect = textRef.current.getBoundingClientRect();
-    const isVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
-    if (isVisible && !hasBeenVisible) {
-      setIsVisible(isVisible);
-      setHasBeenVisible(true);
+  const currentDomRef = domRef.current; // Capture current ref instance
+  observer.observe(currentDomRef);
+
+  return () => {
+    if (currentDomRef) {
+      // Add null check
+      observer.unobserve(currentDomRef);
     }
-  }, 200);
+  };
+}, []);
 
-  useEffect(() => {
-    checkTextVisibility();
-    window.addEventListener("scroll", checkTextVisibility);
-    return () => {
-      window.removeEventListener("scroll", checkTextVisibility);
-    };
-  }, []);
 
-  // ... other parts of your code remain the same ...
-return (
-  <div className={`p-5 grid-item grid-item-1`} ref={textRef}>
-    <div>
+  return (
+    <div className={`p-5 grid-item grid-item-1`} ref={domRef}>
       <CloudinaryContext
         cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
       >
@@ -38,22 +34,24 @@ return (
           width="425" // adjust to your preference
           crop="scale"
           alt=""
-          className={`bg-black ${isVisible ? "fadeIn" : "fadeOut"}`} // apply fade classes here
+          className={`bg-black ${isVisible ? "fadeIn" : "fadeOut"}`}
         />
       </CloudinaryContext>
     </div>
-  </div>
-);
-
+  );
 };
 
-function Sports() {
+
+
+function Cars() {
   const [images, setImages] = useState([]);
+  const [isTitleVisible, setIsTitleVisible] = useState(false);
 
   useEffect(() => {
     fetch("/api/getCarId")
       .then((response) => response.json())
       .then((data) => setImages(data.publicIds));
+    setTimeout(() => setIsTitleVisible(true), 500); // Delay of 500ms before the title becomes visible
   }, []);
 
   return (
@@ -67,6 +65,19 @@ function Sports() {
           crossOrigin="anonymous"
         />
       </Head>
+
+      <Transition
+        show={isTitleVisible}
+        enter="transition-opacity duration-500"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+      >
+        <div className="flex flex-col items-center justify-center text-center p-4">
+          <h2 className="font-bold text-8xl mb-2">Automotive Photography</h2>
+          <p>These are the photos for the automotive photography.</p>
+        </div>
+      </Transition>
+
       <div className={`p-5 grid-container`}>
         {images.map((photo) => (
           <GridItem key={photo} photo={photo} />
@@ -76,4 +87,4 @@ function Sports() {
   );
 }
 
-export default Sports;
+export default Cars;

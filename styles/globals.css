@@ -31,6 +31,11 @@ body {
   transition: all 2s ease-in-out;
 }
 
+.grid-item {
+    transition: all 2s ease-in-out;
+
+}
+
 
 
 

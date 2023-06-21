@@ -35,25 +35,25 @@ function Portfolio() {
         className={`absolute w-full h-full bg-cover transition-opacity duration-500 ${
           bgImage !== "initial" ? "opacity-0" : "opacity-100"
         }`}
-        style={{ backgroundImage: `url("/misc/28-IMG_0106.jpg")` }}
+        style={{ backgroundImage: `url("/3-IMG_2647.jpg")` }}
       />
       <div
         className={`absolute w-full h-full bg-cover transition-opacity duration-500 ${
           bgImage !== "cars" ? "opacity-0" : "opacity-100"
         }`}
-        style={{ backgroundImage: `url("/cars/22-IMG_8944.jpg")` }}
+        style={{ backgroundImage: `url("/4-IMG_0238.jpg")` }}
       />
       <div
         className={`absolute w-full h-full bg-cover transition-opacity duration-500 ${
           bgImage !== "sports" ? "opacity-0" : "opacity-100"
         }`}
-        style={{ backgroundImage: `url("/sports/11-IMG_2825.jpg")` }}
+        style={{ backgroundImage: `url("/5-IMG_0239.jpg")` }}
       />
       <div
         className={`absolute w-full h-full bg-cover transition-opacity duration-500 ${
           bgImage !== "misc" ? "opacity-0" : "opacity-100"
         }`}
-        style={{ backgroundImage: `url("/misc/16-IMG_9983.jpg")` }}
+        style={{ backgroundImage: `url("/8-IMG_0296.jpg")` }}
       />
 
       <div className="z-10 flex flex-col items-center space-y-10">
