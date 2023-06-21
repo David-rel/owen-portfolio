@@ -17,11 +17,11 @@ function Navbar() {
       className="fixed top-0 w-full flex p-12 transition-opacity duration-4000 bg-black z-20"
       style={{ opacity: opacity }}
     >
-      <div className="text-4xl font-bold">Owenw.Photography</div>{" "}
+      <div className="text-4xl font-bold font-audiowide">Owenw.Photography</div>{" "}
       {/* Adonis font */}
       <div className="flex-grow"></div>
       <nav className="flex items-center">
-        <div className="space-x-8 text-lg">
+        <div className="space-x-16">
           {[
             ["/", "Home Page"],
             ["/portfolio", "Portfolio"],
@@ -31,7 +31,9 @@ function Navbar() {
             <Link key={href} href={href} legacyBehavior>
               <a
                 className={
-                  router.pathname === href ? "underline text-xl" : "text-xl"
+                  router.pathname === href
+                    ? "underline text-2xl font-abel"
+                    : "text-2xl font-abel"
                 }
               >
                 {label}
@@ -44,7 +46,7 @@ function Navbar() {
           href="https://www.instagram.com/owenw.photography/"
           target="_blank"
           rel="noopener noreferrer"
-          className="ml-16 text-2xl"
+          className="ml-16 text-2xl font-abel"
         >
           <FaInstagram />
         </a>

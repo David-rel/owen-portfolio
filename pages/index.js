@@ -93,21 +93,21 @@ export default function Home() {
         </div>
       </main>
 
-      <section className="main bg-gray-200">
+      <section className="main bg-gray-200 font-abel">
         <div
           ref={textRef}
           className={`text-2xl mb-4 text-black pl-20 ${
             isVisible ? "fadeIn" : "fadeOut"
           }`}
         >
-          <Link href="/about" className="text-red-600 underline">
+          <Link href="/about" className="text-red-600 underline font-abel">
             About Me
           </Link>{" "}
           - Owen Weis, Photographer and Videographer
         </div>
         <div
           ref={textRef}
-          className={`text-black leading-10 w-4/5 pl-20 ${
+          className={`text-black leading-10 w-4/5 pl-20 font-abel text-xl ${
             isVisible ? "fadeIn" : "fadeOut"
           }`}
         >

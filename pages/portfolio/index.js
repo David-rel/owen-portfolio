@@ -59,7 +59,7 @@ function Portfolio() {
       <div className="z-10 flex flex-col items-center space-y-10">
         <Link href="/portfolio/cars" legacyBehavior>
           <a
-            className={`xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl transition-colors duration-500 ease-in pb-8 sm:pb-4 pt-20 ${
+            className={`xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl transition-colors duration-500 ease-in pb-8 sm:pb-4 pt-20 font-audiowide ${
               loaded ? "text-black" : "text-transparent"
             } ${hover ? "text-white" : "text-black"}`}
             onMouseEnter={() => handleMouseEnter("cars")}
@@ -70,7 +70,7 @@ function Portfolio() {
         </Link>
         <Link href="/portfolio/sports" legacyBehavior>
           <a
-            className={`xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl transition-colors duration-500 ease-in pb-8 sm:pb-4 ${
+            className={`xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl transition-colors duration-500 ease-in pb-8 sm:pb-4 font-audiowide ${
               loaded ? "text-black" : "text-transparent"
             } ${hover ? "text-white" : "text-black"}`}
             onMouseEnter={() => handleMouseEnter("sports")}
@@ -81,7 +81,7 @@ function Portfolio() {
         </Link>
         <Link href="/portfolio/misc" legacyBehavior>
           <a
-            className={`xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl transition-colors duration-500 ease-in pb-8 sm:pb-4 ${
+            className={`xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl transition-colors duration-500 ease-in pb-8 sm:pb-4 font-audiowide ${
               loaded ? "text-black" : "text-transparent"
             } ${hover ? "text-white" : "text-black"}`}
             onMouseEnter={() => handleMouseEnter("misc")}

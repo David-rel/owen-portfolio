@@ -35,8 +35,10 @@ function Footer() {
         ref={textRef}
         className={`${isVisible ? styles.fadeIn : styles.fadeOut} pl-60 `}
       >
-        <h1 className="text-black pb-4">Owen Weis</h1>
-        <h1 className="text-black">A photo away from your next event</h1>
+        <h1 className="text-black text-3xl pb-4 font-audiowide">Owen Weis</h1>
+        <h1 className="text-black font-abel text-xl">
+          A photo away from your next event
+        </h1>
         <p className={styles.footerMessage}>
           Website created by:{" "}
           <Link

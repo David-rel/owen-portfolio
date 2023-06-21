@@ -41,6 +41,10 @@ module.exports = {
       transitionProperty: {
         opacity: "opacity",
       },
+      fontFamily: {
+        abel: ["Abel", "sans-serif"],
+        audiowide: ["Audiowide", "sans-serif"],
+      },
     },
   },
   plugins: [require("@tailwindcss/aspect-ratio")],

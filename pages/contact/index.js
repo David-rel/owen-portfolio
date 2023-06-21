@@ -29,9 +29,7 @@ export default function Contact() {
 
 
   return (
-    <div
-      className={`flex justify-start items-start h-full p-10 pt-36 pb-96`}
-    >
+    <div className={`flex justify-start items-start h-full p-10 pt-36 pb-96`}>
       <Head>
         <title>Contact - Owenw.Photography</title>
       </Head>
@@ -40,9 +38,9 @@ export default function Contact() {
           isVisible ? "fadeIn" : "fadeOut"
         }`}
         ref={textRef}
-      > 
+      >
         <div className="mb-10 mt-7">
-          <p className="text-white text-lg ">
+          <p className="text-white text-3xl font-abel">
             Looking to discuss a project? Please get in touch using the form on
             this page. Generally, I’m able to reply to all inquiries within 48
             hours. {/* Pontano Sans font */}
@@ -50,11 +48,13 @@ export default function Contact() {
         </div>
 
         <div className="">
-          <p className="text-white text-3xl">Owenw.photography@gmail.com</p>
+          <p className="text-white text-3xl font-audiowide">
+            Owenw.photography@gmail.com
+          </p>
         </div>
 
         <div className="mb-20">
-          <p className="text-white text-3xl">(719)-822-1857</p>
+          <p className="text-white text-3xl font-audiowide">(719)-822-1857</p>
         </div>
 
         <div>
@@ -64,13 +64,13 @@ export default function Contact() {
         </div>
       </div>
 
-      <div className="w-2/5 ml-10 p-5 rounded-md shadow-lg">
+      <div className="w-2/5 ml-10 p-5 rounded-md shadow-lg font-abel">
         <form
           className="flex flex-col space-y-5"
           action="https://formspree.io/f/mayznwba"
           method="POST"
         >
-          <h1 className="flex">
+          <h1 className="flex text-xl">
             Name
             <span className="text-gray-400">(required)</span>
           </h1>
