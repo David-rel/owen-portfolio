@@ -30,38 +30,64 @@ body {
   font-family: sans-serif;
 }
 
-
 .grid-container {
-  columns: 3 100px;
+  columns: 1 100px;
   column-gap: 0rem;
   width: 100%;
   margin: 0 auto;
   align-items: center;
 }
 
+@media screen and (min-width: 640px) {
+  .grid-container {
+    columns: 2 100px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .grid-container {
+    columns: 2 100px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .grid-container {
+    columns: 3 100px;
+  }
+}
+
+/* Extra large screens: 4 columns */
+@media screen and (min-width: 13000px) {
+  .grid-container {
+    columns: 4 100px;
+  }
+}
+
+/* Extra extra large screens: 5 columns */
+@media screen and (min-width: 1536px) {
+  .grid-container {
+    columns: 5 100px;
+  }
+}
+
 .grid-container div {
-  width: 500px; /* adjust width */
-  margin: 2px; /* adjust margin */
+  width: 100%;
+  margin: 1px;
   display: inline-block;
   padding: 2px;
   transition: all 2s ease-in-out;
 }
 
 .grid-item {
-    transition: all 2s ease-in-out;
-
+  transition: all 2s ease-in-out;
 }
-
-
-
 
 .main {
   position: relative;
-  padding: 200px 0; /* Adjust padding as needed */
-  background-color: transparent; /* Set the background to transparent */
+  padding: 200px 0;
+  background-color: transparent;
   color: black;
   z-index: 10;
-
 }
 
 .main::before {
@@ -72,7 +98,6 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgb(219, 218, 218);
-  /* Create a slanted shape with a straight bottom edge */
   clip-path: polygon(0 20%, 100% 0%, 100% 100%, 0 100%);
   transform-origin: top left;
   z-index: -1;
@@ -87,7 +112,6 @@ body {
   opacity: 1 !important;
 }
 
-
-.fadeOut, .bg-black { 
+.fadeOut, .bg-black {
   opacity: 0;
 }

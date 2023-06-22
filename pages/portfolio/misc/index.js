@@ -71,10 +71,12 @@ function Cars() {
         enterTo="opacity-100"
       >
         <div className="flex flex-col items-center justify-center text-center p-4">
-          <h2 className="font-bold text-8xl mb-2 font-audiowide">
+          <h2 className="font-bold text-6xl md:text-8xl mb-2 font-audiowide">
             Miscellaneous Photography
           </h2>
-          <p className="font-abel">These are the photos for the miscellaneous photography.</p>
+          <p className="font-abel">
+            These are the photos for the miscellaneous photography.
+          </p>
         </div>
       </Transition>
 

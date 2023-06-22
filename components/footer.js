@@ -33,7 +33,7 @@ function Footer() {
     >
       <div
         ref={textRef}
-        className={`${isVisible ? styles.fadeIn : styles.fadeOut} pl-60 `}
+        className={`${isVisible ? styles.fadeIn : styles.fadeOut} pl-20 md:pl-60 `}
       >
         <h1 className="text-black text-3xl pb-4 font-audiowide">Owen Weis</h1>
         <h1 className="text-black font-abel text-xl">

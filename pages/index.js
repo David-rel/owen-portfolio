@@ -76,7 +76,7 @@ export default function Home() {
 
   return (
     <div className="p-">
-      <main className="pt-36 pl-10">
+      <main className="pt-36 pl-0">
         <Head>
           <title>Owenw.Photography</title>
           <link
@@ -96,7 +96,7 @@ export default function Home() {
       <section className="main bg-gray-200 font-abel">
         <div
           ref={textRef}
-          className={`text-2xl mb-4 text-black pl-20 ${
+          className={`text-2xl mb-4 text-black pl-20 pt-4 ${
             isVisible ? "fadeIn" : "fadeOut"
           }`}
         >
