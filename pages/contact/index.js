@@ -29,12 +29,14 @@ export default function Contact() {
 
 
   return (
-    <div className={`flex justify-start items-start h-full p-10 pt-36 pb-96`}>
+    <div
+      className={`flex flex-col md:flex-row justify-start items-start h-full p-10 pt-36 pb-96`}
+    >
       <Head>
         <title>Contact - Owenw.Photography</title>
       </Head>
       <div
-        className={`w-2/5 bg-black p-0 rounded-md shadow-lg ${
+        className={`w-full md:w-2/5 bg-black p-0 rounded-md shadow-lg mt-5 md:mt-0 ${
           isVisible ? "fadeIn" : "fadeOut"
         }`}
         ref={textRef}
@@ -48,7 +50,7 @@ export default function Contact() {
         </div>
 
         <div className="">
-          <p className="text-white text-3xl font-audiowide">
+          <p className="text-white md:text-xl lg:3xl text-2xl font-audiowide ">
             Owenw.photography@gmail.com
           </p>
         </div>
@@ -64,7 +66,7 @@ export default function Contact() {
         </div>
       </div>
 
-      <div className="w-2/5 ml-10 p-5 rounded-md shadow-lg font-abel">
+      <div className="w-full md:w-2/5 md:ml-10 p-5 mt-5 md:mt-0 rounded-md shadow-lg font-abel">
         <form
           className="flex flex-col space-y-5"
           action="https://formspree.io/f/mayznwba"
@@ -126,4 +128,3 @@ export default function Contact() {
 }
 
 
-//finish adding fade in logic and text sizing fonts

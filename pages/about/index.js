@@ -24,13 +24,13 @@ function About() {
   }, []);
 
   return (
-    <div className="pt-40 flex">
+    <div className="pt-40 flex flex-col md:flex-row">
       <Head>
         <title>About - Owenw.Photography</title>
       </Head>
 
       <div
-        className={`w-1/2 px-8 transition-opacity duration-500 ${
+        className={`w-full md:w-1/2 px-8 transition-opacity duration-500 ${
           textFadeIn ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -66,11 +66,11 @@ function About() {
       </div>
 
       <div
-        className={`w-2/5 px-8 flex flex-col items-start transition-opacity duration-500 ${
+        className={`w-full md:w-2/5 px-8 mt-5 md:mt-0 flex flex-col items-start transition-opacity duration-500 ${
           imageFadeIn ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="relative min-w-[200px] min-h-[200px] lg:w-[450px] lg:h-[550px] xl:w-[700px] xl:h-[600px mb-4] p-2 -m-2 pr-8">
+        <div className="relative w-[300px] h-[300px] lg:w-[450px] lg:h-[550px] xl:w-[650px] xl:h-[600px mb-4] p-2 -m-2 pr-8">
           <Image
             src="/10-IMG_0306.jpg"
             alt="About us"
