@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Abel';
-  src: url('/fonts/Abel-Regular.woff') format('woff');
+  font-family: "Abel";
+  src: url("/fonts/Abel-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Audiowide';
-  src: url('/fonts/Audiowide-Regular.woff') format('woff');
+  font-family: "Audiowide";
+  src: url("/fonts/Audiowide-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -112,6 +112,116 @@ body {
   opacity: 1 !important;
 }
 
-.fadeOut, .bg-black {
+.fadeOut,
+.bg-black {
   opacity: 0;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeInLinks {
+  0% {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInLinks {
+  animation: fadeInLinks 1s ease-out forwards;
+}
+
+.animate-fadeOut {
+  animation: fadeOut 1s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-fadeOutLinks {
+  animation: fadeOutLinks 1s ease-out forwards;
+}
+
+@keyframes fadeOutLinks {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+}
+
+.modal-overlay {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.modal-overlay-open {
+  opacity: 1;
+}
+
+.menu-item-enter {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.menu-item-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+.hamburger {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  width: 30px;
+  height: 22px;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+}
+
+.hamburger .line {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 4px;
+  opacity: 1;
+  left: 0;
+  transition: top 0.3s 0.1s ease-in-out, transform 0.3s 0.1s ease-in-out;
+}
+
+.hamburger .line1 {
+  top: 0px;
+}
+
+.hamburger .line2 {
+  top: 20px;
+}
+
+.hamburger.open .line1 {
+  top: 10px;
+  transform: rotate(135deg);
+}
+
+.hamburger.open .line2 {
+  top: 10px;
+  transform: rotate(-135deg);
 }
