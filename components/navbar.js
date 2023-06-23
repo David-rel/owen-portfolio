@@ -2,6 +2,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { FaInstagram } from "react-icons/fa";
+import classNames from "classnames";
+
 
 function Navbar() {
   const router = useRouter();
@@ -18,7 +20,11 @@ function Navbar() {
     ["/portfolio", "Portfolio"],
     ["/about", "About"],
     ["/contact", "Contact"],
-    ["https://www.instagram.com/owenw.photography/", <FaInstagram />, "_blank"],
+    [
+      "https://www.instagram.com/owenw.photography/",
+      <FaInstagram key="instagramIcon" />,
+      "_blank",
+    ],
   ];
 
   const handleOpenMenu = () => {
@@ -48,10 +54,12 @@ function Navbar() {
 
 function HamburgerIcon({ isOpen, toggle }) {
   return (
-    <button onClick={toggle} className={`hamburger ${isOpen ? "open" : ""}`}>
+    <button
+      onClick={toggle}
+      className={classNames("hamburger", { open: isOpen })}
+    >
       <span className="line line1"></span>
       <span className="line line2"></span>
-      
     </button>
   );
 }
@@ -84,8 +92,9 @@ function HamburgerIcon({ isOpen, toggle }) {
             </Link>
           ))}
         </div>
-
-        <HamburgerIcon isOpen={isOpen} toggle={toggle} />
+        <div className="lg:hidden flex">
+          <HamburgerIcon isOpen={isOpen} toggle={toggle} />
+        </div>
       </nav>
       {isModalRendered && (
         <div
@@ -113,7 +122,10 @@ function HamburgerIcon({ isOpen, toggle }) {
                       : "text-3xl font-abel"
                   }`}
                   style={{ animationDelay: `${index * 0.1}s` }}
-                  onClick={handleCloseMenu}
+                  onClick={() => {
+                    handleCloseMenu();
+                    setIsOpen(false);
+                  }}
                 >
                   {label}
                 </a>
